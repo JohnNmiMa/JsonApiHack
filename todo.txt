@@ -1,0 +1,2 @@
+1) Figure out what sort of API mashup you want to do.
+2) 
