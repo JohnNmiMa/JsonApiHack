@@ -1,2 +1,16 @@
-1) Figure out what sort of API mashup you want to do.
-2) 
+1) Figure out what sort of API mashup you want to do. - DONE
+2) I will do a stock checking application using the  - DONE
+   "Markit On Demand" API.
+3) Draw design. - DONE
+4) Implement design layout in HTML & CSS - DONE
+5) Be able to select a row, and have it highlighted apart from the other rows.
+6) Hook up the "Add to Portfolio" button.
+   * Add Symbol to list
+   * Get quote on symbol, and fill in rest of the fields in the row
+7) Implement the "# shares" field, and compute the "value" field
+8) Implement the Lookup input form to lookup stock names.
+9) Implement the update portfolio button. Have it un selected when there are no
+   stocks listed in the portfolio.
+10) Add a remove icon to the right of each row to delete a stock entry
+11) If the stock is picked, create a stock chart using the chart api.
+
