@@ -100,7 +100,7 @@ header {
 			width:80px;
 		}
 
-			.stockItem h2, .stockItem input, .stockItem div {
+			.stockItem h2, .stockItem input {
 				display: inline-block;
 				background-color:transparent;
 				padding:0 10px;
@@ -109,7 +109,8 @@ header {
 			}
 
 			.stockItem .stockName {
-				width:140px;
+				width:100px;
+				text-transform: uppercase;
 			}
 
 			.stockItem .stockPrice {
@@ -144,8 +145,8 @@ header {
 				font-size:12px;
 			}
 
-			/*.stockItem .stockValue {
-			}*/
+			.stockItem .stockValue {
+			}
 
 /* Used to style the jQuery tooptip */
 .ui-tooltip {

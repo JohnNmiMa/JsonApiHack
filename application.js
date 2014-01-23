@@ -13,6 +13,7 @@ MarkitOnDemand.QuoteService = function(stockSymbol, fCallback) {
     this.fCallback = fCallback;
     this.QUOTE_API = "http://dev.markitondemand.com/Api/v2/Quote/jsonp";
 	this.requestQuote();
+	// this.selectedStock = 0;
     //this.requestJsonpQuote(fCallback);
 }
 
@@ -56,29 +57,92 @@ MarkitOnDemand.QuoteService.prototype.requestJsonpQuote = function(fCallback) {
 
 $(document).ready(function() {
 
-	function showQuote() {
-		try {
-			var symbol = $('input').val();
-			if(symbol.length <= 0)
-				throw {name:"Note", message:"Please enter a valid stock symbol"};
+	function addSymbol(symbol, quote) {
+		var symbol = quote.Symbol;
+		var price = quote.LastPrice.toFixed(2);
+		var change = quote.Change.toFixed(2);
+		var changePcnt = quote.ChangePercent.toFixed(2);
 
-			new MarkitOnDemand.QuoteService(symbol, function(jsonResult) {
-				if (!jsonResult || jsonResult.Message){
+		var itemHtml = "<li class='stockItem'>";
+		itemHtml += "<h2 class='stockName'>" + symbol + "</h2>";
+		itemHtml += "<h2 class='stockPrice anum'>" + price + "</h2>";
+		if (change >= 0)
+			itemHtml += "<h2 class='stockChange anum gain'>+" + change + "</h2>";
+		else
+			itemHtml += "<h2 class='stockChange anum loss'>" + change + "</h2>";
+		itemHtml += "<input type='text' class='numShares anum' name='numShares' placeholder='# shares'>";
+		itemHtml += "<h2 class='stockValue anum'></h2>";
+		itemHtml += "</li>"
+		$(itemHtml).appendTo('#stockList');
+	}
+
+	function getQuote(symbol) {
+		new MarkitOnDemand.QuoteService(symbol, function(jsonResult) {
+			try {
+				if (!jsonResult || jsonResult.Message) {
 					throw new Error(jsonResult.Message);
 				}
-
 				console.log(jsonResult);
+				addSymbol(symbol, jsonResult);
+			} catch(e) {
+				console.log(e.name +': '+ e.message);
+			}
+		});
+	}
 
-				// Update the stock quote
-				$("h1").first().text(jsonResult.Name);
-			});
-		} catch(e) {
-		} finally {
-			return false;
+	// Just toggle whatever stock is clicked on. If it is off, toggle it on,
+	// and unselect the previously selected stock. If it is the same stock
+	// that is already selected, unselect it.
+	function selectStockItem(stockItem, stockName) {
+		var currentlySelectedStock = $('#stockList li.focused');
+		var currentlySelectedStockName = '';
+
+		if (currentlySelectedStock.length) {
+			$(currentlySelectedStock).removeClass('focused');
+
+			currentlySelectedStockName = $(currentlySelectedStock).find('.stockName').text();
+			if (currentlySelectedStockName != stockName) {
+				$(stockItem).addClass('focused');
+			}
+		} else {
+			$(stockItem).addClass('focused');
 		}
 	}
 
-	$('form').submit(showQuote);
+	function updatePortfolio() {
+		try {
+			var symbol = $('#symbolLookup').val();
+
+			if (!symbol.length)
+				throw {name:"Note", message:"Please enter a valid stock symbol"}; 
+
+			//var allNameElements = $('#stockList li h2.stockName').text();
+			$('#stockList li h2.stockName').each(function(index) {
+				var name = $(this).text();
+				if (name == symbol)
+					throw {name:"Note", message:"Can't add symbol: the symbol is already in the portfolio"};
+			});
+
+			// Use AJAX to get a clean stock quote
+			getQuote(symbol);
+		} catch(e) {
+			console.log(e);
+		}
+	}
+
+	/*$('form').submit(function() {
+		showQuote()
+	});*/
+
+	$('#addSymbol').click(function(event) {
+		updatePortfolio();
+		event.preventDefault();
+		$('#symbolLookup').val('');
+	});
+
+	$('#stockList').on('click', 'h2.stockName', function() {
+		selectStockItem($(this).parent(), $(this).text());
+	});
 
 	// jQuery UI code for tooltips
 	$(document).tooltip();
