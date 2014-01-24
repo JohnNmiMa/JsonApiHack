@@ -5,7 +5,7 @@
 		<link href="css/smooth/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 		<link type="text/css" rel="stylesheet" href="reset.css">
 		<link type="text/css" rel="stylesheet" href="main.css">
-		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-2.0.3.js"></script>
 		<script src="js/jquery-ui-1.10.3.custom.js"></script>
 		<script type="text/javascript" src="application.js"></script>
 	</head>
@@ -17,12 +17,20 @@
 		</header>
 		<div id="content">
 			<form id="lookupForm">
-				<input type="text" id="symbolLookup" placeholder="Lookup company name or symbol">
+			<input type="text" id="symbolLookup" placeholder="Lookup company name or symbol">
 				<button id="addSymbol">Add to Portfolio</button>
 				<button id="updatePortfolio" data-loading-text="Loading quote data...">Update Portfolio</button>
 			</form>
-			<form id="stockListForm">
+			<form id="stockListForm" name="stockListForm">
 				<ul id="stockList">
+					<li class="stockItem dummy">
+						<img src="trash.ico">
+						<h2 class="stockName dummy"></h2>
+						<h2 class="stockPrice anum dummy"></h2>
+						<h2 class="stockChange anum dummy"></h2>
+						<input type="text" class="numShares anum dummy" name="numShares" autocomplete="off" disabled="true">
+						<h2 class="stockValue anum dummy">0.00</h2>
+					</li>
 				</ul>
 			</form>
 		</div>

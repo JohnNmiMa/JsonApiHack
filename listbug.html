@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>DynamicListBug</title>
+		<style>
+			body { margin:40px; }
+			div { background-color:lightgrey; }
+		</style>
+		<script src="js/jquery-2.0.3.js"></script>
+	</head>
+	<body>
+		<div>
+			<button>Add Item</button>
+			<form name="stockListForm">
+				<ul></ul>
+			</form>
+		</div>
+		<script>
+			$(document).ready(function() {
+				function changeHandler(event) {
+					console.log("Received input box's change event @" +event.timeStamp);
+				}
+
+				function addInput() {
+					// Create an input element inside a list element
+					var item = '', inputValue = '',
+						itemHtml = "<li><input type='text' autocomplete='off'></li>";
+					item = $(itemHtml).appendTo('form ul'); // add the new item to the ul
+					inputEle = $(item).find('input');     // get the input element
+					
+					// Attach the change event handler to the input element
+					$(inputEle).change(changeHandler);
+				}
+
+				$('button').click(function() { addInput(); });
+			});
+		</script>
+	</body>
+</html>

@@ -8,7 +8,7 @@
    * Add Symbol to list - DONE
    * Get quote on symbol, and fill in rest of the fields in the row - DONE
    * Catch bad request - DONE
-7) Add a remove icon to the right of each row to delete a stock entry
+7) Add a remove icon to the right of each row to delete a stock entry - DONE
 8) Implement the "# shares" field, and compute the "value" field
 9) Add hover popup to show stock info
 10) Implement the Lookup input form to lookup stock names.
