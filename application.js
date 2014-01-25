@@ -1,4 +1,5 @@
 var MarkitOnDemand = {}
+MarkitOnDemand.quotes = {};
 
 /*
  * Define the Markit On Demand lookup service
@@ -13,12 +14,25 @@ MarkitOnDemand.QuoteService = function(stockSymbol, fCallback) {
     this.fCallback = fCallback;
     this.QUOTE_API = "http://dev.markitondemand.com/Api/v2/Quote/jsonp";
 	this.requestQuote();
-	// this.selectedStock = 0;
     //this.requestJsonpQuote(fCallback);
 }
 
 /* Ajax success callback. */
 MarkitOnDemand.QuoteService.prototype.handleSuccess = function(result) {
+    var quote = {
+		symbol: result.Symbol,
+		name: result.Name,
+		price: result.LastPrice,
+		change: result.Change,
+		changePercent: result.ChangePercent,
+		high: result.High,
+		low: result.Low,
+		cap: result.MarketCap,
+		open: result.Open,
+		volume: result.Volume
+	}
+	MarkitOnDemand.quotes[quote.symbol] = quote;
+	console.log(MarkitOnDemand.quotes[quote.symbol].name);
     this.fCallback(result);
 };
 
@@ -95,12 +109,11 @@ $(document).ready(function() {
 		}
 	}
 
-	function addSymbol(symbol, quote) {
-		var symbol = quote.Symbol;
-		var price = quote.LastPrice.toFixed(2);
-		var change = quote.Change.toFixed(2);
-		var changePcnt = quote.ChangePercent.toFixed(2);
-
+	function addSymbol(symbol) {
+		var price = MarkitOnDemand.quotes[symbol].price.toFixed(2);
+		var change = MarkitOnDemand.quotes[symbol].change.toFixed(2);
+		var changePcnt = MarkitOnDemand.quotes[symbol].changePercent.toFixed(2);
+			
 		// Create the stock item
 		var itemHtml = "<li class='stockItem'>";
 		itemHtml += "<img src='trash.ico' class='show'>";
@@ -116,7 +129,6 @@ $(document).ready(function() {
 		var item = $(itemHtml).appendTo('#stockList');
 
 		// Add appropriate event handlers to the new list elements
-		//var stockName = $(item).find('.stockName').text();
 		var numShares = $(item).find('input');
 		$(numShares).change(updateStockValue);
 	}
@@ -128,7 +140,7 @@ $(document).ready(function() {
 					throw new Error(jsonResult.Message);
 				}
 				//console.log(jsonResult);
-				addSymbol(symbol, jsonResult);
+				addSymbol(jsonResult.Symbol);
 			} catch(e) {
 				//console.log(e.name +': '+ e.message);
 			}
@@ -170,19 +182,22 @@ $(document).ready(function() {
 			// Use AJAX to get a clean stock quote
 			getQuote(symbol);
 		} catch(e) {
-			//console.log(e.name +': '+ e.message);
+			console.log(e.name +': '+ e.message);
 		}
 	}
+
+	$('#lookupForm').submit(function(event) {
+		// trap form submissions - force use to use button to add symbol
+		return false;
+	});
 
 	$('#addSymbol').click(function(event) {
 		updatePortfolio();
 		$('#symbolLookup').val('');
 		event.preventDefault();
-		//event.stopPropagation();
 	});
 
 	$('#updatePortfolio').click(function(event) {
-		console.log("Killroy was here");
 		return false;
 	});
 

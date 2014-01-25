@@ -11,17 +11,25 @@
 		<script type="text/javascript" src="application.js"></script>
 	</head>
 	<body>
+		<div id="styleit">
 		<header>
 			<div class="titleBox">
 				<h1 id='title'>Stock Portfolio</h1>
 			</div>
 		</header>
 		<div id="content">
-			<form id="lookupForm">
-			<input type="text" id="symbolLookup" placeholder="Lookup company name or symbol" autocomplete="off">
+			<div>
+				<form id="lookupForm">
+					<div id="lookupDiv">
+						<input type="text" id="symbolLookup" class="ui-helper-clearfix" placeholder="Lookup company name or symbol" autocomplete="off">
+						<span class="help-inline hide">
+							<img src="spinner.gif" align="absmiddle">
+						</span>
+					</div>
+				</form>
 				<button id="addSymbol">Add to Portfolio</button>
 				<button id="updatePortfolio" data-loading-text="Loading quote data...">Update Portfolio</button>
-			</form>
+			</div>
 			<form id="stockListForm" name="stockListForm">
 				<ul id="stockList">
 					<li class="stockItem dummy">
@@ -34,6 +42,7 @@
 					</li>
 				</ul>
 			</form>
+		</div>
 		</div>
 	</body>
 </html>
