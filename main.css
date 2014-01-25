@@ -163,7 +163,8 @@ header {
 			.stockItem h2, .stockItem input {
 				display: inline-block;
 				background-color:transparent;
-				margin:0 10px;
+				margin:0 5px;
+				padding:0 10px;
 				font-size: inherit;
 				font-weight: inherit;
 			}
@@ -171,7 +172,8 @@ header {
 			.stockItem .stockName {
 				width:100px;
 				text-transform: uppercase;
-				margin:0 10px 0 0;
+				margin:0 5px 0 0;
+				padding:0 10px 0 0;
 			}
 
 			.stockItem .stockName.dummy {
