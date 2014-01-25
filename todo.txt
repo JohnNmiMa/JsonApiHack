@@ -9,9 +9,9 @@
    * Get quote on symbol, and fill in rest of the fields in the row - DONE
    * Catch bad request - DONE
 7) Add a remove icon to the right of each row to delete a stock entry - DONE
-8) Implement the "# shares" field, and compute the "value" field
-9) Add hover popup to show stock info
-10) Implement the Lookup input form to lookup stock names.
-11) Implement the update portfolio button. Have it un selected when there are no
+8) Implement the "# shares" field, and compute the "value" field - DONE
+9) Implement the Lookup input form to lookup stock names.
+10) Implement the update portfolio button. Have it un selected when there are no
     stocks listed in the portfolio.
+11) Add hover popup to show stock info
 12) If the stock is picked, create a stock chart using the chart api.

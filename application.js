@@ -181,6 +181,11 @@ $(document).ready(function() {
 		//event.stopPropagation();
 	});
 
+	$('#updatePortfolio').click(function(event) {
+		console.log("Killroy was here");
+		return false;
+	});
+
 	$('#stockList').on('click', 'h2.stockName', function() {
 		selectStockItem($(this).parent(), $(this).text());
 	});
