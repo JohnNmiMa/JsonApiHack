@@ -113,10 +113,28 @@ $(document).ready(function() {
 		}
 	}
 
-	function showQuote() {
+	function showRemoveDialog(stockItem) {
+		vex.dialog.open({
+			contentClassName:'removeDialog', // for styling if needed
+			message: "Are you sure you want to remove this stock from the portfolio?",
+			callback: function(value) {
+				if (value) {
+					$(stockItem).remove();
+					updateTotalValue();
+				}
+			},
+			buttons: [
+				$.extend({}, vex.dialog.buttons.YES, {text: 'Yes'}),
+				$.extend({}, vex.dialog.buttons.NO,  {text: 'Cancel'})
+			]
+		});
+	}
+
+	function showQuoteDialog() {
 		var symbol = $(this).parent().find('.stockName').text();
 		var quote = MarkitOnDemand.quotes[symbol];
 		vex.open({
+			contentClassName:'quoteDialog',
 			content: 
 				'<h4 class="quoteName">'         +quote.name+   '</h3>' +
 				'<h5 class="quoteInfo">Price: '  +quote.price+  '</h5>' +
@@ -126,6 +144,7 @@ $(document).ready(function() {
 				'<h5 class="quoteInfo">Change: ' +quote.change.toFixed(2)+' ('
 												 +quote.changePercent.toFixed(2)+ '%)</h5>' +
 				'<h5 class="quoteInfo">Volume: ' +Utils.numberWithCommas(quote.volume)+ '</h5>',
+			overlayClassName:'quoteDialogOverlay',
 			showCloseButton:false});
 	}
 
@@ -152,9 +171,9 @@ $(document).ready(function() {
 		var numSharesElem = $(item).find('input');
 		$(numSharesElem).change(updateStockValue);
 		var priceElem = $(item).find('.stockPrice');
-		$(priceElem).click(showQuote);
+		$(priceElem).click(showQuoteDialog);
 		var changeElem = $(item).find('.stockChange');
-		$(changeElem).click(showQuote);
+		$(changeElem).click(showQuoteDialog);
 	}
 
 	function getQuote(symbol) {
@@ -230,12 +249,13 @@ $(document).ready(function() {
 	});
 
 	$('#stockList').on('click', 'img.show', function() {
-		var stock = $(this).parent();
+		showRemoveDialog($(this).parent());
+		/*var stock = $(this).parent();
 		var ans = confirm("Are you sure you want to remove this stock from the portfolio?");
 		if (ans==true) {
 			$(stock).remove();
 			updateTotalValue();
-		}
+		}*/
 	});
 
 	// jQuery UI code for tooltips

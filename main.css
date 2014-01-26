@@ -5,23 +5,23 @@ body {
 	color: #333333;
 }
 
-.vex-content {
+.vex-content.quoteDialog {
 	width:200px !important;
 	color:#fff !important;
 	background-color:#60c933 !important;
 }
 
-.vex-content .quoteName {
+.vex-content.quoteDialog .quoteName {
 	font-weight:500 !important;
 	/*color:#006dcc !important;*/
 }
 
-.vex-content .quoteInfo {
+.vex-content.quoteDialog .quoteInfo {
 	font-weight:300 !important;
 	color:#fff !important;
 }
 
-.vex-overlay {
+.vex-overlay.quoteDialogOverlay {
 	background:none !important;
 }
 
