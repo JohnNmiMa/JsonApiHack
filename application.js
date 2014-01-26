@@ -73,6 +73,10 @@ Utils.isNumeric = function(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+Utils.numberWithCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 $(document).ready(function() {
 
 	function updateTotalValue() {
@@ -109,6 +113,22 @@ $(document).ready(function() {
 		}
 	}
 
+	function showQuote() {
+		var symbol = $(this).parent().find('.stockName').text();
+		var quote = MarkitOnDemand.quotes[symbol];
+		vex.open({
+			content: 
+				'<h4 class="quoteName">'         +quote.name+   '</h3>' +
+				'<h5 class="quoteInfo">Price: '  +quote.price+  '</h5>' +
+				'<h5 class="quoteInfo">Open: '   +quote.open+   '</h5>' +
+				'<h5 class="quoteInfo">High: '   +quote.high+   '</h5>' +
+				'<h5 class="quoteInfo">Low: '    +quote.low+    '</h5>' +
+				'<h5 class="quoteInfo">Change: ' +quote.change.toFixed(2)+' ('
+												 +quote.changePercent.toFixed(2)+ '%)</h5>' +
+				'<h5 class="quoteInfo">Volume: ' +Utils.numberWithCommas(quote.volume)+ '</h5>',
+			showCloseButton:false});
+	}
+
 	function addSymbol(symbol) {
 		var price = MarkitOnDemand.quotes[symbol].price.toFixed(2);
 		var change = MarkitOnDemand.quotes[symbol].change.toFixed(2);
@@ -129,8 +149,12 @@ $(document).ready(function() {
 		var item = $(itemHtml).appendTo('#stockList');
 
 		// Add appropriate event handlers to the new list elements
-		var numShares = $(item).find('input');
-		$(numShares).change(updateStockValue);
+		var numSharesElem = $(item).find('input');
+		$(numSharesElem).change(updateStockValue);
+		var priceElem = $(item).find('.stockPrice');
+		$(priceElem).click(showQuote);
+		var changeElem = $(item).find('.stockChange');
+		$(changeElem).click(showQuote);
 	}
 
 	function getQuote(symbol) {

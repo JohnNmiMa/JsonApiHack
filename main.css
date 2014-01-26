@@ -5,6 +5,26 @@ body {
 	color: #333333;
 }
 
+.vex-content {
+	width:200px !important;
+	color:#fff !important;
+	background-color:#60c933 !important;
+}
+
+.vex-content .quoteName {
+	font-weight:500 !important;
+	/*color:#006dcc !important;*/
+}
+
+.vex-content .quoteInfo {
+	font-weight:300 !important;
+	color:#fff !important;
+}
+
+.vex-overlay {
+	background:none !important;
+}
+
 #styleit {
 	margin: 30px auto 30px auto;
 	min-width:700px;
@@ -181,6 +201,7 @@ header {
 			}
 
 			.stockItem .stockPrice {
+				cursor: pointer;
 			}
 
 			.stockItem .stockChange {
@@ -189,6 +210,7 @@ header {
 				line-height:25px;
 				border-radius: 4px;
 				width:60px;
+				cursor: pointer;
 			}
 
 			.stockItem .stockChange.gain {
