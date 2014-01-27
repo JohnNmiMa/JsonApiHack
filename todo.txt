@@ -12,7 +12,7 @@
 8) Implement the "# shares" field, and compute the "value" field - DONE
 9) Implement the Lookup input form to lookup stock names. - DONE
 10) Add hover popup to show stock info - DONE
-11) Add hover popup to ask if stock should be deleted from portfolio
-11) Implement the update portfolio button. Have it un selected when there are no
+11) Add hover popup to ask if stock should be deleted from portfolio - DONE
+12) If the stock is picked, create a stock chart using the chart api.- DONE
+13) Implement the update portfolio button. Have it un selected when there are no
     stocks listed in the portfolio.
-12) If the stock is picked, create a stock chart using the chart api.

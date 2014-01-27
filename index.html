@@ -10,43 +10,48 @@
 		<script src="js/jquery-2.0.3.js"></script>
 		<script src="js/jquery-ui-1.10.3.custom.js"></script>
 		<script type="text/javascript" src="lookup.js"></script>
+		<script type="text/javascript" src="MarkitOnDemand.js"></script>
 		<script src="vex-2.0.1/js/vex.combined.min.js"></script>
 		<script>vex.defaultOptions.className = 'vex-theme-default';</script>
+		<script type="text/javascript" src="highstock.js"></script>
 		<script type="text/javascript" src="application.js"></script>
 	</head>
 	<body>
 		<div id="styleit">
-		<header>
-			<div class="titleBox">
-				<h1 id='title'>Stock Portfolio</h1>
-			</div>
-		</header>
-		<div id="content">
-			<div>
-				<form id="lookupForm">
-					<div id="lookupDiv">
-						<input type="text" id="symbolLookup" class="ui-helper-clearfix" placeholder="Lookup company name or symbol" autocomplete="off">
-						<span class="help-inline hide">
-							<img src="spinner.gif" align="absmiddle">
-						</span>
-					</div>
+			<header>
+				<div class="titleBox">
+					<h1 id='title'>Stock Portfolio</h1>
+				</div>
+			</header>
+
+			<div id="content">
+				<div>
+					<form id="lookupForm">
+						<div id="lookupDiv">
+							<input type="text" id="symbolLookup" class="ui-helper-clearfix" placeholder="Lookup company name or symbol" autocomplete="off">
+							<span class="help-inline hide">
+								<img src="spinner.gif" align="absmiddle">
+							</span>
+						</div>
+					</form>
+					<button id="addSymbol">Add to Portfolio</button>
+					<button id="updatePortfolio" data-loading-text="Loading quote data...">Update Portfolio</button>
+				</div>
+				<form id="stockListForm" name="stockListForm">
+					<ul id="stockList">
+						<li class="stockItem dummy">
+							<img src="trash.ico">
+							<h2 class="stockName dummy"></h2>
+							<h2 class="stockPrice anum dummy"></h2>
+							<h2 class="stockChange anum dummy"></h2>
+							<input type="text" class="numShares anum dummy" name="numShares" autocomplete="off" disabled="true">
+							<h2 class="stockValue anum dummy"></h2>
+						</li>
+					</ul>
 				</form>
-				<button id="addSymbol">Add to Portfolio</button>
-				<button id="updatePortfolio" data-loading-text="Loading quote data...">Update Portfolio</button>
 			</div>
-			<form id="stockListForm" name="stockListForm">
-				<ul id="stockList">
-					<li class="stockItem dummy">
-						<img src="trash.ico">
-						<h2 class="stockName dummy"></h2>
-						<h2 class="stockPrice anum dummy"></h2>
-						<h2 class="stockChange anum dummy"></h2>
-						<input type="text" class="numShares anum dummy" name="numShares" autocomplete="off" disabled="true">
-						<h2 class="stockValue anum dummy"></h2>
-					</li>
-				</ul>
-			</form>
 		</div>
+		<div id="chartDemoContainer">
 		</div>
 	</body>
 </html>

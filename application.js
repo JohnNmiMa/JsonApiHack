@@ -1,73 +1,3 @@
-var MarkitOnDemand = {}
-MarkitOnDemand.quotes = {};
-
-/*
- * Define the Markit On Demand lookup service
- */
-
-/*
- *Define the Markit On Demand quote service
- */
-
-MarkitOnDemand.QuoteService = function(stockSymbol, fCallback) {
-	this.symbol = stockSymbol;
-    this.fCallback = fCallback;
-    this.QUOTE_API = "http://dev.markitondemand.com/Api/v2/Quote/jsonp";
-	this.requestQuote();
-    //this.requestJsonpQuote(fCallback);
-}
-
-/* Ajax success callback. */
-MarkitOnDemand.QuoteService.prototype.handleSuccess = function(result) {
-    var quote = {
-		symbol: result.Symbol,
-		name: result.Name,
-		price: result.LastPrice,
-		change: result.Change,
-		changePercent: result.ChangePercent,
-		high: result.High,
-		low: result.Low,
-		cap: result.MarketCap,
-		open: result.Open,
-		volume: result.Volume
-	}
-	MarkitOnDemand.quotes[quote.symbol] = quote;
-	console.log(MarkitOnDemand.quotes[quote.symbol].name);
-    this.fCallback(result);
-};
-
-/* Ajax error callback */
-MarkitOnDemand.QuoteService.prototype.handleError = function(result) {
-    console.error(result);
-};
-
-/* Make an ajax request to the Quote API */
-MarkitOnDemand.QuoteService.prototype.requestQuote = function() {
-    // Abort any open requests
-    if (this.xhr) { this.xhr.abort(); }
-
-    // Start a new request
-    this.xhr = $.ajax({
-        data: { symbol: this.symbol },
-        url: this.QUOTE_API,
-        dataType: "jsonp",
-        success: this.handleSuccess,
-        error: this.handleError,
-        context: this
-    });
-};
-
-// Get stock quotes using the getJSON() convenience method
-MarkitOnDemand.QuoteService.prototype.requestJsonpQuote = function(fCallback) {
-	var jsonpReq = "?symbol=" + this.symbol + "&jsoncallback=?";
-	var url = this.QUOTE_API + jsonpReq;
-	$.getJSON(url, fCallback);
-}
-
-/*
- * Define the Markit On Demand chart service
- */
-
 var Utils = {}
 Utils.isNumeric = function(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
@@ -193,19 +123,23 @@ $(document).ready(function() {
 	// Just toggle whatever stock is clicked on. If it is off, toggle it on,
 	// and unselect the previously selected stock. If it is the same stock
 	// that is already selected, unselect it.
-	function selectStockItem(stockItem, stockName) {
+	function selectStockItem(stockItem, symbol) {
 		var currentlySelectedStock = $('#stockList li.focused');
 		var currentlySelectedStockName = '';
+		var duration = 3650;
 
 		if (currentlySelectedStock.length) {
 			$(currentlySelectedStock).removeClass('focused');
+			$('#chartDemoContainer').empty();
 
 			currentlySelectedStockName = $(currentlySelectedStock).find('.stockName').text();
-			if (currentlySelectedStockName != stockName) {
+			if (currentlySelectedStockName != symbol) {
 				$(stockItem).addClass('focused');
+				new MarkitOnDemand.InteractiveChartApi(symbol, duration);
 			}
 		} else {
 			$(stockItem).addClass('focused');
+			new MarkitOnDemand.InteractiveChartApi(symbol, duration);
 		}
 	}
 
@@ -245,17 +179,12 @@ $(document).ready(function() {
 	});
 
 	$('#stockList').on('click', 'h2.stockName', function() {
-		selectStockItem($(this).parent(), $(this).text());
+		var symbol = $(this).text();
+		selectStockItem($(this).parent(), symbol);
 	});
 
 	$('#stockList').on('click', 'img.show', function() {
 		showRemoveDialog($(this).parent());
-		/*var stock = $(this).parent();
-		var ans = confirm("Are you sure you want to remove this stock from the portfolio?");
-		if (ans==true) {
-			$(stock).remove();
-			updateTotalValue();
-		}*/
 	});
 
 	// jQuery UI code for tooltips
