@@ -5,6 +5,10 @@ body {
 	color: #333333;
 }
 
+/*
+ *Setup VEX popup styling
+ */
+
 .vex-content.quoteDialog {
 	width:200px !important;
 	color:#fff !important;

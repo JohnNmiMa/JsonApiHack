@@ -82,8 +82,8 @@ $(document).ready(function() {
 
 	function addSymbol(symbol) {
 		var price = MarkitOnDemand.quotes[symbol].LastPrice.toFixed(2);
-		var change = MarkitOnDemand.quotes[symbol].Change.toFixed(2);
-		var changePcnt = MarkitOnDemand.quotes[symbol].ChangePercent.toFixed(2);
+			change = MarkitOnDemand.quotes[symbol].Change.toFixed(2),
+			changePcnt = MarkitOnDemand.quotes[symbol].ChangePercent.toFixed(2);
 			
 		// Create the stock item
 		var itemHtml = "<li class='stockItem'>";
@@ -117,7 +117,48 @@ $(document).ready(function() {
 				//console.log(jsonResult);
 				addSymbol(jsonResult.Symbol);
 			} catch(e) {
-				//console.log(e.name +': '+ e.message);
+				console.log(e.name +': '+ e.message);
+			}
+		});
+	}
+
+	function updateSymbol(symbol, listItem) {
+		var price = MarkitOnDemand.quotes[symbol].LastPrice.toFixed(2),
+		    change = MarkitOnDemand.quotes[symbol].Change.toFixed(2);
+			changeEle = $(listItem).find('.stockChange');
+
+		$(listItem).find('.stockPrice').text(price);
+		if (change >= 0) {
+			$(changeEle).text('+'+change);
+			$(changeEle).removeClass('loss');
+			$(changeEle).addClass('gain');
+		}
+		else {
+			$(changeEle).text(change);
+			$(changeEle).removeClass('gain');
+			$(changeEle).addClass('loss');
+		}
+	}
+
+	function updateQuote(symbol) {
+		new MarkitOnDemand.QuoteService(symbol, function(jsonResult) {
+			var item = '';
+			try {
+				if (!jsonResult || jsonResult.Message) {
+					throw new Error(jsonResult.Message);
+				}
+
+				// Find list item with stock symbol jsonResult.Symbol
+				item = $("#stockList .stockName").filter(function() {
+					return ($(this).text() === jsonResult.Symbol)
+				});
+				// and update the stock values
+				updateSymbol(jsonResult.Symbol, $(item).parent());
+
+				// Update the value of the portfolio
+				$(item).parent().find('input').trigger('change');
+			} catch(e) {
+				console.log(e.name +': '+ e.message);
 			}
 		});
 	}
@@ -145,7 +186,7 @@ $(document).ready(function() {
 		}
 	}
 
-	function updatePortfolio() {
+	function addStockToPortfolio() {
 		try {
 			var symbol = $('#symbolLookup').val().toUpperCase();
 
@@ -165,27 +206,39 @@ $(document).ready(function() {
 		}
 	}
 
+	function updatePortfolio()
+	{
+		var symbol = "";
+
+		// Loop through each stock in the portfolio
+		$('#stockList .stockItem').each(function() {
+			symbol = $(this).find('.stockName').text();
+			if (symbol == "") return true; // Strangly, but this will continue to the next iteration
+
+			// Request an update from the stock
+			updateQuote(symbol);
+		});
+	}
+
 	$('#lookupForm').submit(function(event) {
-		// trap form submissions - force user to use button to add symbol
+		// Trap form submissions - force user to use button to add symbol
 		return false;
 	});
 
-	$('#addSymbol').click(function(event) {
-		updatePortfolio();
+	$('#addSymbol').click(function(event) { // The add button
+		addStockToPortfolio();
 		$('#symbolLookup').val('');
 		event.preventDefault();
 	});
 
-	$('#updatePortfolio').click(function(event) {
-		return false;
-	});
+	$('#updatePortfolio').click(updatePortfolio); // The update button
 
-	$('#stockList').on('click', 'h2.stockName', function() {
+	$('#stockList').on('click', 'h2.stockName', function() { // Selecting a stock will show its chart
 		var symbol = $(this).text();
 		selectStockItem($(this).parent(), symbol);
 	});
 
-	$('#stockList').on('click', 'img.show', function() {
+	$('#stockList').on('click', 'img.show', function() { // Clicking the trash can to delete a stock
 		showRemoveDialog($(this).parent());
 	});
 

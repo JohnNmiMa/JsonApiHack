@@ -62,6 +62,7 @@ MarkitOnDemand.QuoteService = function(stockSymbol, fCallback) {
 
 /* Ajax success callback. */
 MarkitOnDemand.QuoteService.prototype.handleSuccess = function(result) {
+	delete MarkitOnDemand.quotes[result.Symbol]; // remove old stock info
 	MarkitOnDemand.quotes[result.Symbol] = result;
 	//console.log(MarkitOnDemand.quotes[result.Symbol].name);
     this.fCallback(result);
