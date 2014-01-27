@@ -98,7 +98,7 @@ $(document).ready(function() {
 				'<li><p>Click left of the stock symbol to remove that stock from the portfolio.</p></li>' +
 				'<li><p>Click on the stock symbol to show the stock\'s chart.</p></li>' +
 				'<li><p>Unclick on the stock symbol to remove the stock\'s chart.</p></li>' +
-				'<li><p>Click on the "Update Portfolio" button to update the sock prices and values.</p></li>',
+				'<li><p>Click on the "Update Portfolio" button to update the sock prices and values during trading periods.</p></li>',
 			overlayClassName:'infoDialogOverlay',
 			showCloseButton:false});
 	}
@@ -195,23 +195,25 @@ $(document).ready(function() {
 	function selectStockItem(stockItem, symbol) {
 		var currentlySelectedStock = $('#stockList li.focused');
 		var currentlySelectedStockName = '';
-		var duration = 3650;
+		var duration = 3650; // 10 years of chart data
 
 		if (currentlySelectedStock.length) {
 			// If there is a currently selected stock, unselect it and remove its chart
 			$(currentlySelectedStock).removeClass('focused');
-			$('#chartContainer').empty();
+			$('#chartContainer').hide();
 
 			// If the user selected another stock, select the new one and show its chart
 			currentlySelectedStockName = $(currentlySelectedStock).find('.stockName').text();
 			if (currentlySelectedStockName != symbol) {
 				$(stockItem).addClass('focused');
 				new MarkitOnDemand.InteractiveChartApi(symbol, duration);
+				$('#chartContainer').show();
 			}
 		} else {
 			// Nothing was selected, so let's select it now and show its chart
 			$(stockItem).addClass('focused');
 			new MarkitOnDemand.InteractiveChartApi(symbol, duration);
+			$('#chartContainer').show();
 		}
 	}
 
@@ -295,6 +297,8 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+	$('#chartContainer').hide();
 
 	// jQuery UI code for tooltips
 	$(document).tooltip();

@@ -212,8 +212,11 @@ MarkitOnDemand.InteractiveChartApi.prototype.render = function(data) {
 
     // set the allowed units for data grouping
     var groupingUnits = [[
-        'week',                         // unit name
+        'day',                          // unit name
         [1]                             // allowed multiples
+    ], [
+		'week',
+		[1]
     ], [
         'month',
         [1, 2, 3, 4, 6]
@@ -222,6 +225,11 @@ MarkitOnDemand.InteractiveChartApi.prototype.render = function(data) {
     // create the chart
     $('#chartContainer').highcharts('StockChart', {
         
+		chart: {
+			backgroundColor: '#dedede',
+			borderRadius: '10px',
+		},
+
         rangeSelector: {
             selected: 1
             //enabled: false
@@ -235,20 +243,20 @@ MarkitOnDemand.InteractiveChartApi.prototype.render = function(data) {
             title: {
                 text: 'OHLC'
             },
-            height: 200,
+            height: 300,
             lineWidth: 2
         }, {
             title: {
                 text: 'Volume'
             },
-            top: 300,
+            top: 390,
             height: 100,
             offset: 0,
             lineWidth: 2
         }],
         
         series: [{
-            type: 'candlestick',
+            type: 'ohlc',
             name: this.symbol,
             data: ohlc,
             dataGrouping: {
