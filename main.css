@@ -11,6 +11,10 @@ body {
 	background-color:#60c933 !important;
 }
 
+.vex-content.quoteDialog.loss {
+	background-color:#e34d1b !important;
+}
+
 .vex-content.quoteDialog .quoteName {
 	font-weight:500 !important;
 	/*color:#006dcc !important;*/

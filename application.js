@@ -63,8 +63,10 @@ $(document).ready(function() {
 	function showQuoteDialog() {
 		var symbol = $(this).parent().find('.stockName').text();
 		var quote = MarkitOnDemand.quotes[symbol];
+		var change = parseFloat(quote.Change);
+		var className = change>0 ? 'quoteDialog' : 'quoteDialog loss';
 		vex.open({
-			contentClassName:'quoteDialog',
+			contentClassName: className,
 			content: 
 				'<h4 class="quoteName">'             +quote.Name+   '</h3>' +
 				'<h5 class="quoteInfo">Last Price: ' +quote.LastPrice+  '</h5>' +
