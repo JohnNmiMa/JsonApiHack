@@ -5,6 +5,49 @@ MarkitOnDemand.quotes = {};
  * Define the Markit On Demand lookup service
  */
 
+MarkitOnDemand.LookupService = function(request, fBeforeSendCallback, fSuccessCallback) {
+    this.fBeforeSendCallback = fBeforeSendCallback;
+    this.fSuccessCallback = fSuccessCallback;
+    this.LOOKUP_API = "http://dev.markitondemand.com/api/v2/Lookup/jsonp",
+	this.request = request,
+	this.requestLookup();
+}
+
+/* Ajax success callback. */
+MarkitOnDemand.LookupService.prototype.handleSuccess = function(data) {
+	//console.log(data);
+    this.fSuccessCallback(data);
+};
+
+MarkitOnDemand.LookupService.prototype.handleBeforeSend = function() {
+    this.fBeforeSendCallback();
+}
+
+/* Ajax error callback */
+MarkitOnDemand.LookupService.prototype.handleError = function(result) {
+    console.error(result);
+};
+
+/* Make an ajax request to the Quote API */
+MarkitOnDemand.LookupService.prototype.requestLookup = function() {
+    // Abort any open requests
+    if (this.xhr) { this.xhr.abort(); }
+
+    // Start a new request
+	this.xhr = $.ajax({
+		url: this.LOOKUP_API,
+		dataType: "jsonp",
+		data: {
+			input: this.request.term
+		},
+		beforeSend: this.handleBeforeSend,
+		success: this.handleSuccess,
+        error: this.handleError,
+        context: this
+	});
+};
+
+
 /*
  *Define the Markit On Demand quote service
  */
@@ -20,7 +63,7 @@ MarkitOnDemand.QuoteService = function(stockSymbol, fCallback) {
 /* Ajax success callback. */
 MarkitOnDemand.QuoteService.prototype.handleSuccess = function(result) {
 	MarkitOnDemand.quotes[result.Symbol] = result;
-	console.log(MarkitOnDemand.quotes[result.Symbol].name);
+	//console.log(MarkitOnDemand.quotes[result.Symbol].name);
     this.fCallback(result);
 };
 

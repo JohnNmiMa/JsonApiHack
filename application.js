@@ -187,6 +187,27 @@ $(document).ready(function() {
 		showRemoveDialog($(this).parent());
 	});
 
+	// In the symbol input field, setup the jQuery UI autocomplete feature to 
+	// display stocks from the MarkitOnDemand lookup service as the user types.
+	$("#symbolLookup").focus().autocomplete({
+		source: function(request,response) {
+			// Make AJAX request to lookup stock symbols
+			new MarkitOnDemand.LookupService(request, function() {
+				$("span.help-inline").removeClass('hide');
+				//$("span.label-info").empty().hide();
+			},
+			function(data) {
+				response( $.map(data, function(item) {
+					return {
+						label: item.Name + " (" +item.Exchange+ ")",
+						value: item.Symbol
+					}
+				}));
+				$("span.help-inline").addClass('hide');
+			});
+		}
+	});
+
 	// jQuery UI code for tooltips
 	$(document).tooltip();
 });
