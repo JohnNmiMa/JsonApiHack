@@ -66,14 +66,14 @@ $(document).ready(function() {
 		vex.open({
 			contentClassName:'quoteDialog',
 			content: 
-				'<h4 class="quoteName">'         +quote.Name+   '</h3>' +
-				'<h5 class="quoteInfo">Price: '  +quote.LastPrice+  '</h5>' +
-				'<h5 class="quoteInfo">Open: '   +quote.Open+   '</h5>' +
-				'<h5 class="quoteInfo">High: '   +quote.High+   '</h5>' +
-				'<h5 class="quoteInfo">Low: '    +quote.Low+    '</h5>' +
-				'<h5 class="quoteInfo">Change: ' +quote.Change.toFixed(2)+' ('
-												 +quote.ChangePercent.toFixed(2)+ '%)</h5>' +
-				'<h5 class="quoteInfo">Volume: ' +Utils.numberWithCommas(quote.Volume)+ '</h5>',
+				'<h4 class="quoteName">'             +quote.Name+   '</h3>' +
+				'<h5 class="quoteInfo">Last Price: ' +quote.LastPrice+  '</h5>' +
+				'<h5 class="quoteInfo">Open: '       +quote.Open+   '</h5>' +
+				'<h5 class="quoteInfo">High: '       +quote.High+   '</h5>' +
+				'<h5 class="quoteInfo">Low: '        +quote.Low+    '</h5>' +
+				'<h5 class="quoteInfo">Change: '     +quote.Change.toFixed(2)+' ('
+												     +quote.ChangePercent.toFixed(2)+ '%)</h5>' +
+				'<h5 class="quoteInfo">Volume: '     +Utils.numberWithCommas(quote.Volume)+ '</h5>',
 			overlayClassName:'quoteDialogOverlay',
 			showCloseButton:false});
 	}
@@ -164,7 +164,7 @@ $(document).ready(function() {
 	}
 
 	$('#lookupForm').submit(function(event) {
-		// trap form submissions - force use to use button to add symbol
+		// trap form submissions - force user to use button to add symbol
 		return false;
 	});
 
