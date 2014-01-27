@@ -66,22 +66,22 @@ $(document).ready(function() {
 		vex.open({
 			contentClassName:'quoteDialog',
 			content: 
-				'<h4 class="quoteName">'         +quote.name+   '</h3>' +
-				'<h5 class="quoteInfo">Price: '  +quote.price+  '</h5>' +
-				'<h5 class="quoteInfo">Open: '   +quote.open+   '</h5>' +
-				'<h5 class="quoteInfo">High: '   +quote.high+   '</h5>' +
-				'<h5 class="quoteInfo">Low: '    +quote.low+    '</h5>' +
-				'<h5 class="quoteInfo">Change: ' +quote.change.toFixed(2)+' ('
-												 +quote.changePercent.toFixed(2)+ '%)</h5>' +
-				'<h5 class="quoteInfo">Volume: ' +Utils.numberWithCommas(quote.volume)+ '</h5>',
+				'<h4 class="quoteName">'         +quote.Name+   '</h3>' +
+				'<h5 class="quoteInfo">Price: '  +quote.LastPrice+  '</h5>' +
+				'<h5 class="quoteInfo">Open: '   +quote.Open+   '</h5>' +
+				'<h5 class="quoteInfo">High: '   +quote.High+   '</h5>' +
+				'<h5 class="quoteInfo">Low: '    +quote.Low+    '</h5>' +
+				'<h5 class="quoteInfo">Change: ' +quote.Change.toFixed(2)+' ('
+												 +quote.ChangePercent.toFixed(2)+ '%)</h5>' +
+				'<h5 class="quoteInfo">Volume: ' +Utils.numberWithCommas(quote.Volume)+ '</h5>',
 			overlayClassName:'quoteDialogOverlay',
 			showCloseButton:false});
 	}
 
 	function addSymbol(symbol) {
-		var price = MarkitOnDemand.quotes[symbol].price.toFixed(2);
-		var change = MarkitOnDemand.quotes[symbol].change.toFixed(2);
-		var changePcnt = MarkitOnDemand.quotes[symbol].changePercent.toFixed(2);
+		var price = MarkitOnDemand.quotes[symbol].LastPrice.toFixed(2);
+		var change = MarkitOnDemand.quotes[symbol].Change.toFixed(2);
+		var changePcnt = MarkitOnDemand.quotes[symbol].ChangePercent.toFixed(2);
 			
 		// Create the stock item
 		var itemHtml = "<li class='stockItem'>";

@@ -19,20 +19,8 @@ MarkitOnDemand.QuoteService = function(stockSymbol, fCallback) {
 
 /* Ajax success callback. */
 MarkitOnDemand.QuoteService.prototype.handleSuccess = function(result) {
-    var quote = {
-		symbol: result.Symbol,
-		name: result.Name,
-		price: result.LastPrice,
-		change: result.Change,
-		changePercent: result.ChangePercent,
-		high: result.High,
-		low: result.Low,
-		cap: result.MarketCap,
-		open: result.Open,
-		volume: result.Volume
-	}
-	MarkitOnDemand.quotes[quote.symbol] = quote;
-	console.log(MarkitOnDemand.quotes[quote.symbol].name);
+	MarkitOnDemand.quotes[result.Symbol] = result;
+	console.log(MarkitOnDemand.quotes[result.Symbol].name);
     this.fCallback(result);
 };
 
