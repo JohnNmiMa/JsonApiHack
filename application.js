@@ -9,6 +9,7 @@ Utils.numberWithCommas = function(x) {
 
 $(document).ready(function() {
 
+	// Update the portfolio value field
 	function updateTotalValue() {
 		var total = parseFloat(0.0), stockValue = 0.0;
 		$('#stockList .stockValue').each(function() {
@@ -22,6 +23,7 @@ $(document).ready(function() {
 		$('#stockList .stockValue.dummy').text(total.toFixed(2));
 	}
 
+	// Update the field that allows the user to enter how many shares of a stock they own
 	function updateStockValue(event) {
 		try {
 			var numShares = Number($(this).val()),
@@ -43,6 +45,7 @@ $(document).ready(function() {
 		}
 	}
 
+	// Use VEX to present the dialog to remove stocks from the portfolio
 	function showRemoveDialog(stockItem) {
 		vex.dialog.open({
 			contentClassName:'removeDialog', // for styling if needed
@@ -60,6 +63,7 @@ $(document).ready(function() {
 		});
 	}
 
+	// Use VEX to show each stymbols stock information
 	function showQuoteDialog() {
 		var symbol = $(this).parent().find('.stockName').text();
 		var quote = MarkitOnDemand.quotes[symbol];
@@ -80,13 +84,35 @@ $(document).ready(function() {
 			showCloseButton:false});
 	}
 
+	// Use VEX to show the application instructions
+	function showInfoDialog() {
+		vex.open({
+			contentClassName: 'infoDialog',
+			content: 
+				'<h2>Usage</h2>' +
+				'<ul class="instructions">' +
+				'<li><p>Type in the stock input field to lookup stock symbols.</p></li>' +
+				'<li><p>Click on the "Add to Portfolio" button to add the stock to the portfolio.</p></li>' +
+				'<li><p>Click in the "price" or "price change" field to see more stock information.</p></li>' +
+				'<li><p>Click in stocks\' "# shares" field to show shares owned.</p></li>' +
+				'<li><p>Click left of the stock symbol to remove that stock from the portfolio.</p></li>' +
+				'<li><p>Click on the stock symbol to show the stock\'s chart.</p></li>' +
+				'<li><p>Unclick on the stock symbol to remove the stock\'s chart.</p></li>' +
+				'<li><p>Click on the "Update Portfolio" button to update the sock prices and values.</p></li>',
+			overlayClassName:'infoDialogOverlay',
+			showCloseButton:false});
+	}
+
 	function addSymbol(symbol) {
 		var price = MarkitOnDemand.quotes[symbol].LastPrice.toFixed(2);
 			change = MarkitOnDemand.quotes[symbol].Change.toFixed(2),
-			changePcnt = MarkitOnDemand.quotes[symbol].ChangePercent.toFixed(2);
-			
+			changePcnt = MarkitOnDemand.quotes[symbol].ChangePercent.toFixed(2),
+			itemHtml = "",	
+			item = "",
+			numSharedElem = "", priceElem = "", changeElem = "";
+
 		// Create the stock item
-		var itemHtml = "<li class='stockItem'>";
+		itemHtml = "<li class='stockItem'>";
 		itemHtml += "<img src='trash.ico' class='show'>";
 		itemHtml += "<h2 class='stockName'>" + symbol + "</h2>";
 		itemHtml += "<h2 class='stockPrice anum'>" + price + "</h2>";
@@ -97,23 +123,23 @@ $(document).ready(function() {
 		itemHtml += "<input type='text' class='numShares anum' name='numShares' placeholder='# shares' autocomplete='off'>";
 		itemHtml += "<h2 class='stockValue anum'></h2>";
 		itemHtml += "</li>"
-		var item = $(itemHtml).appendTo('#stockList');
+		item = $(itemHtml).appendTo('#stockList');
 
 		// Add appropriate event handlers to the new list elements
-		var numSharesElem = $(item).find('input');
+		numSharesElem = $(item).find('input');
 		$(numSharesElem).change(updateStockValue);
-		var priceElem = $(item).find('.stockPrice');
+		priceElem = $(item).find('.stockPrice');
 		$(priceElem).click(showQuoteDialog);
-		var changeElem = $(item).find('.stockChange');
+		changeElem = $(item).find('.stockChange');
 		$(changeElem).click(showQuoteDialog);
 	}
 
 	function getQuote(symbol) {
 		new MarkitOnDemand.QuoteService(symbol, function(jsonResult) {
 			try {
-				if (!jsonResult || jsonResult.Message) {
+				if (!jsonResult || jsonResult.Message)
 					throw new Error(jsonResult.Message);
-				}
+
 				//console.log(jsonResult);
 				addSymbol(jsonResult.Symbol);
 			} catch(e) {
@@ -155,7 +181,7 @@ $(document).ready(function() {
 				// and update the stock values
 				updateSymbol(jsonResult.Symbol, $(item).parent());
 
-				// Update the value of the portfolio
+				// Update the value of the portfolio by triggering its callback
 				$(item).parent().find('input').trigger('change');
 			} catch(e) {
 				console.log(e.name +': '+ e.message);
@@ -172,15 +198,18 @@ $(document).ready(function() {
 		var duration = 3650;
 
 		if (currentlySelectedStock.length) {
+			// If there is a currently selected stock, unselect it and remove its chart
 			$(currentlySelectedStock).removeClass('focused');
-			$('#chartDemoContainer').empty();
+			$('#chartContainer').empty();
 
+			// If the user selected another stock, select the new one and show its chart
 			currentlySelectedStockName = $(currentlySelectedStock).find('.stockName').text();
 			if (currentlySelectedStockName != symbol) {
 				$(stockItem).addClass('focused');
 				new MarkitOnDemand.InteractiveChartApi(symbol, duration);
 			}
 		} else {
+			// Nothing was selected, so let's select it now and show its chart
 			$(stockItem).addClass('focused');
 			new MarkitOnDemand.InteractiveChartApi(symbol, duration);
 		}
@@ -240,6 +269,10 @@ $(document).ready(function() {
 
 	$('#stockList').on('click', 'img.show', function() { // Clicking the trash can to delete a stock
 		showRemoveDialog($(this).parent());
+	});
+
+	$('#info').click(function() {
+		showInfoDialog();
 	});
 
 	// In the symbol input field, setup the jQuery UI autocomplete feature to 

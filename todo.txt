@@ -15,7 +15,8 @@
 11) Add hover popup to ask if stock should be deleted from portfolio - DONE
 12) If the stock is picked, create a stock chart using the chart api.- DONE
 13) Implement the update portfolio button. Have it un selected when there are no
-    stocks listed in the portfolio.
+    stocks listed in the portfolio. - DONE
 14) Clean up the lookup service (put it in the mob.js file) - DONE
 15) Clean up the quote storage. - DONE
-16) Customize the chart to look like you like charts
+16) Add a gear icon to show instructions.
+17) Customize the chart to look like you like charts

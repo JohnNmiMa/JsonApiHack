@@ -117,7 +117,7 @@ MarkitOnDemand.InteractiveChartApi.prototype.PlotChart = function(){
     //Make JSON request for timeseries data
     $.ajax({
         beforeSend:function(){
-            $("#chartDemoContainer").text("Loading chart...");
+            $("#chartContainer").text("Loading chart...");
         },
         data: params,
         url: "http://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp",
@@ -220,7 +220,7 @@ MarkitOnDemand.InteractiveChartApi.prototype.render = function(data) {
     ]];
 
     // create the chart
-    $('#chartDemoContainer').highcharts('StockChart', {
+    $('#chartContainer').highcharts('StockChart', {
         
         rangeSelector: {
             selected: 1

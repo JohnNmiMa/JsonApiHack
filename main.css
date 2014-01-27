@@ -33,6 +33,17 @@ body {
 	background:none !important;
 }
 
+.vex-content.infoDialog {
+	font-weight:300 !important;
+	width:600px !important;
+}
+
+.vex-content.infoDialog ul.instructions {
+	margin-left:10px !important;
+	padding-left:10px !important;
+	list-style: disc !important;
+}
+
 #styleit {
 	margin: 30px auto 10px auto;
 	min-width:700px;
@@ -43,6 +54,7 @@ body {
 }
 
 header {
+	position: relative;
 	padding: 2rem;
 }
 
@@ -56,6 +68,16 @@ header {
 		line-height:30px;
 		font-size: 30px;
 		font-weight: 500;
+	}
+
+	header img#info {
+		position: absolute;
+		top:0;
+		right:0;
+		padding:10px;
+		cursor: pointer;
+		width:27px;
+		height:27px;
 	}
 
 #content {
@@ -202,6 +224,7 @@ header {
 				text-transform: uppercase;
 				margin:0 5px 0 0;
 				padding:0 10px 0 0;
+				cursor: pointer;
 			}
 
 			.stockItem .stockName.dummy {
@@ -257,7 +280,7 @@ header {
 				font-weight:500;
 			}
 
-#chartDemoContainer {
+#chartContainer {
 	margin: 0 auto 0 auto;
 	min-width:700px;
 	max-width: 800px;
