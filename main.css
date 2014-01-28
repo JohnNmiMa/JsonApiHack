@@ -38,7 +38,7 @@ body {
 	width:600px !important;
 }
 
-.vex-content.infoDialog ul.instructions {
+.vex-content.infoDialog ul.instructions, .vex-content.infoDialog ul.attributions {
 	margin-left:10px !important;
 	padding-left:10px !important;
 	list-style: disc !important;
@@ -76,9 +76,15 @@ header {
 		right:0;
 		padding:10px;
 		cursor: pointer;
-		width:25px;
-		height:25px;
-		opacity:0.4;
+	}
+
+	header #info.fa-stack {
+		position: absolute;
+		top:0;
+		right:0;
+		padding:10px;
+		cursor: pointer;
+		opacity:0.45;
 	}
 
 #content {
@@ -121,7 +127,7 @@ header {
 			opacity:0;
 		}
 
-		#lookupDiv img {
+		#lookupDiv img.spinner {
 			vertical-align:middle;
 		}
 
@@ -195,15 +201,26 @@ header {
 			margin-top:20px;
 		}
 
-			.stockItem img {
+			/* For the trash.ico file */
+			.stockItem img.trash {
 				width:23px;
 				height:23px;
 				vertical-align:middle;
 				opacity:0;
 			}
-
-			.stockItem img.show:hover {
+			.stockItem img.trash.show:hover {
 				opacity:0.4;
+			}
+
+			/* For the scalable vector trash font file*/
+			.stockItem i.trash {
+				padding-right: 5px;
+				vertical-align:middle;
+				cursor: pointer;
+				opacity:0;
+			}
+			.stockItem i.trash.show:hover {
+				opacity:0.45;
 			}
 
 			.stockItem h2, .stockItem input {

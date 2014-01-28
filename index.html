@@ -6,11 +6,11 @@
 		<link type="text/css" rel="stylesheet" href="reset.css">
 		<link rel="stylesheet" href="vex-2.0.1/css/vex.css" />
 		<link rel="stylesheet" href="vex-2.0.1/css/vex-theme-default.css" />
+		<link type="text/css" rel="stylesheet" href="font-awesome/css/font-awesome.css">
 		<link type="text/css" rel="stylesheet" href="main.css">
 		<script src="js/jquery-2.0.3.js"></script>
 		<script src="js/jquery-ui-1.10.3.custom.js"></script>
 		<script type="text/javascript" src="MarkitOnDemand.js"></script>
-		<!--<script type="text/javascript" src="lookup.js"></script>-->
 		<script src="vex-2.0.1/js/vex.combined.min.js"></script>
 		<script>vex.defaultOptions.className = 'vex-theme-default';</script>
 		<script type="text/javascript" src="highstock.js"></script>
@@ -22,7 +22,11 @@
 				<div class="titleBox">
 					<h1 id='title'>Stock Portfolio</h1>
 				</div>
-				<img src="info.png" id="info">
+				<!--<img src="info.png" id="info">-->
+				<span id="info" class="fa-stack">
+				  <i class="fa fa-circle-o fa-stack-2x"></i>
+				  <i class="fa fa-info fa-stack-1x"></i>
+				</span>
 			</header>
 
 			<div id="content">
@@ -31,7 +35,7 @@
 						<div id="lookupDiv">
 							<input type="text" id="symbolLookup" class="ui-helper-clearfix" placeholder="Lookup company name or symbol" autocomplete="off">
 							<span class="help-inline hide">
-								<img src="spinner.gif" align="absmiddle">
+								<img id="spinner" src="spinner.gif" align="absmiddle">
 							</span>
 						</div>
 					</form>
@@ -41,7 +45,8 @@
 				<form id="stockListForm" name="stockListForm">
 					<ul id="stockList">
 						<li class="stockItem dummy">
-							<img src="trash.ico">
+							<!--<img class="trash" src="trash.ico">-->
+							<i class="fa fa-trash-o trash"></i>
 							<h2 class="stockName dummy"></h2>
 							<h2 class="stockPrice anum dummy"></h2>
 							<h2 class="stockChange anum dummy"></h2>

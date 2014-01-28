@@ -98,7 +98,15 @@ $(document).ready(function() {
 				'<li><p>Click left of the stock symbol to remove that stock from the portfolio.</p></li>' +
 				'<li><p>Click on the stock symbol to show the stock\'s chart.</p></li>' +
 				'<li><p>Unclick on the stock symbol to remove the stock\'s chart.</p></li>' +
-				'<li><p>Click on the "Update Portfolio" button to update the sock prices and values during trading periods.</p></li>',
+				'<li><p>Click on the "Update Portfolio" button to update the sock prices and values during trading periods.</p></li>' +
+				'</ul>' +
+				'<h2>Attributions</h2>' +
+				'<ul class="attributions">' +
+				'<li><a href="http://dev.markitondemand.com/">Markit On Demand\'s incredible Stock Data APIs!</a></li>' +
+				'<li><a href="http://www.highcharts.com/">Highchart JS\'s powerful interactive charts!</a></li>' +
+				'<li><a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome\'s fabulous scaled vector icons!</a></li>' +
+				'<li><a href="http://github.hubspot.com/vex/docs/welcome/">VEX\'s beautiful 21st Century Dialogs!</a></li>' +
+				'</ul>',
 			overlayClassName:'infoDialogOverlay',
 			showCloseButton:false});
 	}
@@ -113,7 +121,8 @@ $(document).ready(function() {
 
 		// Create the stock item
 		itemHtml = "<li class='stockItem'>";
-		itemHtml += "<img src='trash.ico' class='show'>";
+		//itemHtml += "<img src='trash.ico' class='trash show'>";     // for trash.ico image files
+		itemHtml += "<i class='fa fa-trash-o fa-lg trash show'></i>"; // for scalable vector trash font files
 		itemHtml += "<h2 class='stockName'>" + symbol + "</h2>";
 		itemHtml += "<h2 class='stockPrice anum'>" + price + "</h2>";
 		if (change >= 0)
@@ -269,7 +278,7 @@ $(document).ready(function() {
 		selectStockItem($(this).parent(), symbol);
 	});
 
-	$('#stockList').on('click', 'img.show', function() { // Clicking the trash can to delete a stock
+	$('#stockList').on('click', '.trash.show', function() { // Clicking the trash can to delete a stock
 		//$('#chartContainer').hide();
 		showRemoveDialog($(this).parent());
 	});
