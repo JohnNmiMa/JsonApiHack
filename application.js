@@ -52,8 +52,11 @@ $(document).ready(function() {
 			message: "Are you sure you want to remove this stock from the portfolio?",
 			callback: function(value) {
 				if (value) {
-					$(stockItem).remove();
-					updateTotalValue();
+					if ($(stockItem).hasClass('focused')) { // If the item to be removed is focused (has a chart showing)
+						$('#chartContainer').hide();        // then remove the chart
+					}
+					$(stockItem).remove();                  // Remove the stock item from the portfolio
+					updateTotalValue();                     // Make sure the portfolio value is adjusted appropriately
 				}
 			},
 			buttons: [
@@ -279,7 +282,6 @@ $(document).ready(function() {
 	});
 
 	$('#stockList').on('click', '.trash.show', function() { // Clicking the trash can to delete a stock
-		//$('#chartContainer').hide();
 		showRemoveDialog($(this).parent());
 	});
 
