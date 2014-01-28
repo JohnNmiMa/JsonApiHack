@@ -84,7 +84,7 @@ $(document).ready(function() {
 			showCloseButton:false});
 	}
 
-	// Use VEX to show the application instructions
+	// Use VEX dialogs to show the application instructions
 	function showInfoDialog() {
 		vex.open({
 			contentClassName: 'infoDialog',
