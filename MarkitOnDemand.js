@@ -1,5 +1,6 @@
-var MarkitOnDemand = {}
-MarkitOnDemand.quotes = {};
+var MarkitOnDemand = {
+	quotes : {}
+}
 
 /*
  * Define the Markit On Demand lookup service

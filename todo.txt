@@ -18,5 +18,6 @@
     stocks listed in the portfolio. - DONE
 14) Clean up the lookup service (put it in the mob.js file) - DONE
 15) Clean up the quote storage. - DONE
-16) Add a gear icon to show instructions.
-17) Customize the chart to look like you like charts
+16) Add an info icon to show instructions. - DONE
+17) Customize the chart to look like you like charts - DONE
+18) hide the chart of the stock that is being deleted is currently selected.

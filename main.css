@@ -78,6 +78,7 @@ header {
 		cursor: pointer;
 		width:25px;
 		height:25px;
+		opacity:0.4;
 	}
 
 #content {
@@ -177,11 +178,6 @@ header {
 			font-size:16px;
 			font-weight:300;
 			/*padding-left:30px;*/
-		}
-
-		.stockItem:hover {
-			/*background: url(trash.ico) center left no-repeat;*/
-			/*background-size: 23px 23px;*/
 		}
 
 		.stockItem.focused {

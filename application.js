@@ -270,6 +270,7 @@ $(document).ready(function() {
 	});
 
 	$('#stockList').on('click', 'img.show', function() { // Clicking the trash can to delete a stock
+		//$('#chartContainer').hide();
 		showRemoveDialog($(this).parent());
 	});
 
