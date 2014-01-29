@@ -255,15 +255,52 @@ MarkitOnDemand.InteractiveChartApi.prototype.render = function(data) {
             offset: 0,
             lineWidth: 2
         }],
+
+		// 0=1m, 1=3m, 2=6m, 3=YTD, 4=1y, 5=All
+		rangeSelector: {
+			selected:4
+		},
+
+		//legend: {
+			//enabled: true,
+			//layout: 'vertical',
+			//align: 'right',
+			//verticalAlign: 'middle',
+			//borderWidth: 0
+		//},
+
+		plotOptions: {
+			series: {
+				marker: {
+					enabled: false,
+				}
+			}
+		},
         
         series: [{
-            type: 'ohlc',
+			//type: 'line', //Enable if you want to show the moving averages (EMA), and disable the ohlc chart
+			type: 'ohlc',
             name: this.symbol,
+			//id: 'primary', // Enable if you want to show the moving averages (EMA)
             data: ohlc,
             dataGrouping: {
                 units: groupingUnits
             }
         }, {
+			name: '50day SMA',
+			linkedTo: 'primary',
+			showInLegend: true,
+			type: 'trendline',
+			algorithm: 'SMA',
+			periods: 50
+        }, {
+			name: '200day SMA',
+			linkedTo: 'primary',
+			showInLegend: true,
+			type: 'trendline',
+			algorithm: 'SMA',
+			periods: 200
+		}, {
             type: 'column',
             name: 'Volume',
             data: volume,
