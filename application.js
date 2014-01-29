@@ -97,11 +97,11 @@ $(document).ready(function() {
 				'<li><p>Type in the stock input field to lookup stock symbols.</p></li>' +
 				'<li><p>Click on the "Add to Portfolio" button to add the stock to the portfolio.</p></li>' +
 				'<li><p>Click in the "price" or "price change" field to see more stock information.</p></li>' +
-				'<li><p>Click in stocks\' "# shares" field to show shares owned.</p></li>' +
+				'<li><p>Click in stocks\' "# shares" field to add shares owned.</p></li>' +
 				'<li><p>Click left of the stock symbol to remove that stock from the portfolio.</p></li>' +
 				'<li><p>Click on the stock symbol to show the stock\'s chart.</p></li>' +
 				'<li><p>Unclick on the stock symbol to remove the stock\'s chart.</p></li>' +
-				'<li><p>Click on the "Update Portfolio" button to update the sock prices and values during trading periods.</p></li>' +
+				'<li><p>Click on the "Update Portfolio" button to update the stock prices and values during trading periods.</p></li>' +
 				'</ul>' +
 				'<h2>Attributions</h2>' +
 				'<ul class="attributions">' +
