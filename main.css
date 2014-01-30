@@ -1,8 +1,11 @@
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
 	line-height: 20px;
 	color: #333333;
+}
+
+div#outer {
+	margin:0 20px;
 }
 
 /*
@@ -21,11 +24,12 @@ body {
 
 .vex-content.quoteDialog .quoteName {
 	font-weight:500 !important;
-	/*color:#006dcc !important;*/
+	font-size:0.85em !important;
 }
 
 .vex-content.quoteDialog .quoteInfo {
 	font-weight:300 !important;
+	font-size:0.75em !important;
 	color:#fff !important;
 }
 
@@ -46,7 +50,7 @@ body {
 
 #styleit {
 	margin: 30px auto 10px auto;
-	min-width:700px;
+	min-width: 635px;
 	max-width: 800px;
 	border-radius:10px;
 	box-shadow: 3px 3px 10px rgba(50, 50, 50, 0.3);
@@ -66,7 +70,6 @@ header {
 	header #title {
 		float:left;
 		line-height:30px;
-		font-size: 30px;
 		font-weight: 500;
 	}
 
@@ -85,6 +88,7 @@ header {
 		padding:10px;
 		cursor: pointer;
 		opacity:0.45;
+		font-size: 1.05em;
 	}
 
 #content {
@@ -128,7 +132,7 @@ header {
 					vertical-align: middle;
 					background: none;
 					border: none;
-					font-size: 18px;
+					font-size: 1.1em;
 					color: #555;
 				}
 
@@ -137,7 +141,7 @@ header {
 				}
 
 				#symbolLookup::-webkit-input-placeholder {
-					font-size: 12px;
+					font-size: 0.65em;
 				}
 
 		button#addSymbol, button#updatePortfolio {
@@ -146,7 +150,7 @@ header {
 			text-align: center;
 			vertical-align: middle;
 			padding: 4px 12px;
-			font-size: 14px;
+			font-size: 0.9em;
 			color: #ffffff;
 			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 			background-color: #006dcc;
@@ -166,13 +170,14 @@ header {
 		}
 
 	#stockListForm {
-		min-width: 650px;
+		/*min-width: 570px;*/
 	}
 
 		.stockItem {
 			vertical-align:middle;
+			min-width: 570px;
 			line-height:40px;
-			font-size:16px;
+			font-size: 1.1em;
 			font-weight:300;
 		}
 
@@ -204,7 +209,7 @@ header {
 
 			/* For the scalable vector trash font file*/
 			.stockItem i.trash {
-				padding-right: 5px;
+				padding: 10px 5px 10px;
 				vertical-align:middle;
 				cursor: pointer;
 				opacity:0;
@@ -228,13 +233,15 @@ header {
 				margin:0 5px 0 0;
 				padding:0 10px 0 0;
 				cursor: pointer;
+				vertical-align:middle;
 			}
 
 			.stockItem .stockName.dummy {
-				width:85px;
+				width:80px;
 			}
 
 			.stockItem .stockPrice {
+				vertical-align:middle;
 				cursor: pointer;
 			}
 
@@ -262,10 +269,12 @@ header {
 				border:0;
 				font-family: inherit;
 				font-weight: inherit;
+				line-height: 22px;
+				vertical-align:middle;
 			}
 
 			.stockItem .numShares::-webkit-input-placeholder {
-				font-size:12px;
+				font-size: 0.7em;
 			}
 
 			.stockItem .numShares:hover, .stockItem .numShares:focus {
@@ -279,13 +288,16 @@ header {
 				box-shadow: none;
 			}
 
+			.stockItem .stockValue {
+				vertical-align:middle;
+			}
 			.stockItem .stockValue.dummy {
 				font-weight:500;
 			}
 
 #chartContainer {
 	margin: 0 auto 30px auto;
-	min-width:700px;
+	min-width: 635px;
 	max-width: 800px;
 	height:600px;
 	border-radius:10px;

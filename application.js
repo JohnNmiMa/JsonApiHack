@@ -75,11 +75,11 @@ $(document).ready(function() {
 		vex.open({
 			contentClassName: className,
 			content: 
-				'<h4 class="quoteName">'             +quote.Name+   '</h3>' +
-				'<h5 class="quoteInfo">Last Price: ' +quote.LastPrice+  '</h5>' +
-				'<h5 class="quoteInfo">Open: '       +quote.Open+   '</h5>' +
-				'<h5 class="quoteInfo">High: '       +quote.High+   '</h5>' +
-				'<h5 class="quoteInfo">Low: '        +quote.Low+    '</h5>' +
+				'<h4 class="quoteName">'             +quote.Name+      '</h4>' +
+				'<h5 class="quoteInfo">Last Price: ' +quote.LastPrice+ '</h5>' +
+				'<h5 class="quoteInfo">Open: '       +quote.Open+      '</h5>' +
+				'<h5 class="quoteInfo">High: '       +quote.High+      '</h5>' +
+				'<h5 class="quoteInfo">Low: '        +quote.Low+       '</h5>' +
 				'<h5 class="quoteInfo">Change: '     +quote.Change.toFixed(2)+' ('
 												     +quote.ChangePercent.toFixed(2)+ '%)</h5>' +
 				'<h5 class="quoteInfo">Volume: '     +Utils.numberWithCommas(quote.Volume)+ '</h5>',
