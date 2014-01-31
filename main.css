@@ -149,7 +149,7 @@ header {
 			max-width:285px;
 			text-align: center;
 		}
-		@media screen and (max-width: 1200px) {
+		@media screen and (max-width: 1280px) {
 			#buttonDiv {
 				display: block;
 			}
