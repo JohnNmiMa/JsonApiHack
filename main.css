@@ -126,7 +126,7 @@ header {
 				}
 
 				#symbolLookup {
-					width: 300px;
+					width: 242px;
 					height: 23px;
 					line-height: 23px;
 					vertical-align: middle;
@@ -141,33 +141,32 @@ header {
 				}
 
 				#symbolLookup::-webkit-input-placeholder {
-					font-size: 0.65em;
+					font-size: 0.7em;
 				}
 
-		button#addSymbol, button#updatePortfolio {
+		#buttonDiv {
 			display: inline-block;
-			line-height: 21px;
+			max-width:285px;
 			text-align: center;
-			vertical-align: middle;
-			padding: 4px 12px;
-			font-size: 0.9em;
-			color: #ffffff;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-			background-color: #006dcc;
-			background-image: linear-gradient(to bottom, #0088cc, #0044cc);
-			background-repeat: repeat-x;
-			border: 1px solid #cccccc;
-			border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-			border-radius: 7px;
-			cursor: pointer;
-			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 		}
-		/*button#addSymbol {
-			[>float:left;<]
-		}
-		button#updatePortfolio {
-			[>float:right;<]
-		}*/
+
+			button#addSymbol, button#updatePortfolio {
+				line-height: 21px;
+				text-align: center;
+				vertical-align: middle;
+				padding: 4px 12px;
+				font-size: 0.9em;
+				color: #ffffff;
+				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+				background-color: #006dcc;
+				background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+				background-repeat: repeat-x;
+				border: 1px solid #cccccc;
+				border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+				border-radius: 7px;
+				cursor: pointer;
+				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+			}
 
 		button#addSymbol:focus, button#updatePortfolio:focus {
 			border-color: rgba(82, 168, 236, 0.9);
@@ -302,7 +301,7 @@ header {
 
 #chartContainer {
 	margin: 0 auto 30px auto;
-	min-width: 635px;
+	min-width: 615px;
 	max-width: 800px;
 	height:600px;
 	border-radius:10px;
