@@ -149,6 +149,11 @@ header {
 			max-width:285px;
 			text-align: center;
 		}
+		@media screen and (max-width: 400px) {
+			#buttonDiv {
+				display: block;
+			}
+		}
 
 			button#addSymbol, button#updatePortfolio {
 				line-height: 21px;
